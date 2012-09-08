@@ -27,7 +27,7 @@ class SwrArticle(Article):
             return
         article = article[0]
         # removing comments
-        for x in self.descendants(article):
+        for x in list(article.descendants):
             if isinstance(x, bs4.Comment):
                 x.extract()
         # removing elements which don't provide content
@@ -57,16 +57,6 @@ class SwrArticle(Article):
         # TODO self.date is unused, isn't it? but i still fill it here
         date = soup.select("p.aenderung")
         self.date = date and date[0].get_text() or ''
-
-    # XXX a bug in bs4 that tag.descendants isnt working when .extract is called??
-    # TODO investigate and report
-    @staticmethod
-    def descendants(tag):
-        x = tag.next_element
-        while x:
-            next = x.next_element or x.parent and x.parent != tag and x.parent.next_sibling
-            yield x
-            x = next
 
     def __unicode__(self):
         return self.document
