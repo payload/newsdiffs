@@ -352,4 +352,4 @@ def update_versions(do_all=False):
     subprocess.call([GIT_PROGRAM, 'gc', '--quiet'], cwd=models.GIT_DIR)
 
 if __name__ == '__main__':
-    print >>sys.stderr, "Try `python website/manage.py scraper`."
+    print >> sys.stderr, "Try `python website/manage.py scraper`."
